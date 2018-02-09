@@ -1,0 +1,6 @@
+D:\MovieCatalogProject\MovieCatalogService\bin\MovieCatalogService.dll.config
+D:\MovieCatalogProject\MovieCatalogService\bin\MovieCatalogService.dll
+D:\MovieCatalogProject\MovieCatalogService\bin\MovieCatalogService.pdb
+D:\MovieCatalogProject\MovieCatalogService\obj\Debug\MovieCatalogService.csproj.CoreCompileInputs.cache
+D:\MovieCatalogProject\MovieCatalogService\obj\Debug\MovieCatalogService.dll
+D:\MovieCatalogProject\MovieCatalogService\obj\Debug\MovieCatalogService.pdb
