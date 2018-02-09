@@ -20,7 +20,6 @@ D:\MovieCatalogProject\MovieCatalog\bin\roslyn\Microsoft.DiaSymReader.Native.x86
 D:\MovieCatalogProject\MovieCatalog\bin\roslyn\Microsoft.VisualBasic.Core.targets
 D:\MovieCatalogProject\MovieCatalog\bin\roslyn\Microsoft.Win32.Primitives.dll
 D:\MovieCatalogProject\MovieCatalog\bin\roslyn\System.AppContext.dll
-D:\MovieCatalogProject\MovieCatalog\bin\roslyn\System.Collections.Immutable.dll
 D:\MovieCatalogProject\MovieCatalog\bin\roslyn\System.Console.dll
 D:\MovieCatalogProject\MovieCatalog\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
 D:\MovieCatalogProject\MovieCatalog\bin\roslyn\System.Diagnostics.Process.dll
@@ -75,3 +74,4 @@ D:\MovieCatalogProject\MovieCatalog\bin\System.Web.WebPages.Razor.xml
 D:\MovieCatalogProject\MovieCatalog\obj\Debug\MovieCatalogApp.csproj.CoreCompileInputs.cache
 D:\MovieCatalogProject\MovieCatalog\obj\Debug\MovieCatalog.dll
 D:\MovieCatalogProject\MovieCatalog\obj\Debug\MovieCatalog.pdb
+D:\MovieCatalogProject\MovieCatalog\bin\roslyn\System.Collections.Immutable.dll

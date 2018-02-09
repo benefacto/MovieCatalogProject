@@ -14,7 +14,11 @@ namespace MovieCatalog
                 "~/Scripts/angular.js",
                 "~/Scripts/ui-grid.js"));
 
-            BundleTable.EnableOptimizations = true;
+            bundles.Add(new ScriptBundle("~/bundles/GridApp")
+                .Include("~/Scripts/GridController.js")
+                .Include("~/Scripts/GridApp.js"));
+
+            BundleTable.EnableOptimizations = false;
         }
     }
 }
