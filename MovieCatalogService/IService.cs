@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System.Collections.Generic;
+using System.ServiceModel;
 using System.ServiceModel.Web;
 
 namespace MovieCatalogService
@@ -8,11 +9,13 @@ namespace MovieCatalogService
     public interface IService
     {
         [OperationContract]
-        [WebGet]
-        string EchoWithGet(string s);
+        [WebInvoke(Method = "GET", UriTemplate = "/Movie",
+            RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        List<Movie> GetMovies();
 
         [OperationContract]
-        [WebInvoke]
-        string EchoWithPost(string s);
+        [WebInvoke(Method = "PUT", UriTemplate = "/Movie/{Id}",
+            RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        string UpdateMovie(Movie movieToUpdate);
     }
 }
