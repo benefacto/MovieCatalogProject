@@ -25,7 +25,6 @@ D:\MovieCatalogProject\MovieCatalog\bin\roslyn\System.Diagnostics.FileVersionInf
 D:\MovieCatalogProject\MovieCatalog\bin\roslyn\System.Diagnostics.Process.dll
 D:\MovieCatalogProject\MovieCatalog\bin\roslyn\System.Diagnostics.StackTrace.dll
 D:\MovieCatalogProject\MovieCatalog\bin\roslyn\System.IO.Compression.dll
-D:\MovieCatalogProject\MovieCatalog\bin\roslyn\System.IO.FileSystem.dll
 D:\MovieCatalogProject\MovieCatalog\bin\roslyn\System.IO.FileSystem.DriveInfo.dll
 D:\MovieCatalogProject\MovieCatalog\bin\roslyn\System.IO.FileSystem.Primitives.dll
 D:\MovieCatalogProject\MovieCatalog\bin\roslyn\System.IO.Pipes.dll
@@ -75,3 +74,4 @@ D:\MovieCatalogProject\MovieCatalog\obj\Debug\MovieCatalogApp.csproj.CoreCompile
 D:\MovieCatalogProject\MovieCatalog\obj\Debug\MovieCatalog.dll
 D:\MovieCatalogProject\MovieCatalog\obj\Debug\MovieCatalog.pdb
 D:\MovieCatalogProject\MovieCatalog\bin\roslyn\System.Collections.Immutable.dll
+D:\MovieCatalogProject\MovieCatalog\bin\roslyn\System.IO.FileSystem.dll

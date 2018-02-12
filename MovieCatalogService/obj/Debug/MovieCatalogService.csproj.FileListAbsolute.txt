@@ -4,3 +4,5 @@ D:\MovieCatalogProject\MovieCatalogService\bin\MovieCatalogService.pdb
 D:\MovieCatalogProject\MovieCatalogService\obj\Debug\MovieCatalogService.csproj.CoreCompileInputs.cache
 D:\MovieCatalogProject\MovieCatalogService\obj\Debug\MovieCatalogService.dll
 D:\MovieCatalogProject\MovieCatalogService\obj\Debug\MovieCatalogService.pdb
+D:\MovieCatalogProject\MovieCatalogService\bin\Newtonsoft.Json.dll
+D:\MovieCatalogProject\MovieCatalogService\bin\Newtonsoft.Json.xml

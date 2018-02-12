@@ -13,5 +13,7 @@ namespace MovieCatalogService
         string Director { get; set; }
         [JsonProperty("year")]
         int Year { get; set; }
+        [JsonProperty("runningTime")]
+        int RunningTime { get; set; }
     }
 }
