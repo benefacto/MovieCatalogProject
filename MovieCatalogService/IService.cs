@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using System.ServiceModel.Web;
 
 namespace MovieCatalogService
@@ -9,13 +8,15 @@ namespace MovieCatalogService
     public interface IService
     {
         [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "/Movie",
-            RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        IEnumerable<Movie> GetMovies();
+        [WebInvoke(Method = "GET", UriTemplate = "movie",
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped)]
+        string GetMovies();
 
         [OperationContract]
-        [WebInvoke(Method = "PUT", UriTemplate = "/Movie/{Id}",
-            RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET", UriTemplate = "movie/{movieToUpdate}",
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped)]
         string UpdateMovie(string movieToUpdate);
     }
 }

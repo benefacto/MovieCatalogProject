@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Web.Hosting;
 
 namespace MovieCatalogService
 {
@@ -16,9 +17,9 @@ namespace MovieCatalogService
 
         public Service()
         {
-            FilePath = @"~\Data\MovieCatalog.json";
+            FilePath = HostingEnvironment.MapPath(@"~\Data\MovieCatalog.json");
         }
-        public IEnumerable<Movie> GetMovies()
+        public string GetMovies()
         {
             IEnumerable<Movie> movies;
             try
@@ -30,7 +31,7 @@ namespace MovieCatalogService
             {
                 throw ex;
             }
-            return movies;
+            return JsonConvert.SerializeObject(movies);
         }
 
         public string UpdateMovie(string movieToUpdate)
