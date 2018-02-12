@@ -11,11 +11,11 @@ namespace MovieCatalogService
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "/Movie",
             RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        List<Movie> GetMovies();
+        IEnumerable<Movie> GetMovies();
 
         [OperationContract]
         [WebInvoke(Method = "PUT", UriTemplate = "/Movie/{Id}",
             RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        string UpdateMovie(Movie movieToUpdate);
+        string UpdateMovie(string movieToUpdate);
     }
 }
