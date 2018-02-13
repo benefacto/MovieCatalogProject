@@ -10,11 +10,12 @@
             });
     }
 
-    var update = function () {
+    var update = function (rowEntity) {
         // TO-DO: Get PUT request to service to update data working
-        $http.put(endpoint + "/" + JSON.stringify(rowEntity))
+        console.log(rowEntity);
+        $http.put(endpoint + "/" + rowEntity.id, JSON.stringify(rowEntity))
             .then(function (response) {
-                console.log(JSON.parse(response.data.GetMoviesResult));
+                console.log(JSON.parse(response.data.UpdateMovieResult));
             }, function (response) {
                 alert("error!");
             });
@@ -26,8 +27,8 @@
             gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
                 console.log("afterCellEdit fired");
                 if (newValue !== oldValue && $scope.recentEditedValue !== newValue) {
-                    update();
-                    init();
+                    update(rowEntity);
+                    //init();
                 }
             });
         },

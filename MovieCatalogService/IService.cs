@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.ServiceModel;
 using System.ServiceModel.Web;
 
 namespace MovieCatalogService
@@ -14,9 +15,13 @@ namespace MovieCatalogService
         string GetMovies();
 
         [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "movie/{movieToUpdate}",
+        [WebInvoke(Method = "PUT", UriTemplate = "movie/{Id}",
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Wrapped)]
-        string UpdateMovie(string movieToUpdate);
+        string UpdateMovie(String Id, Movie newMovie);
+
+        [OperationContract]
+        [WebInvoke(Method = "OPTIONS", UriTemplate = "*")]
+        void GetOptions();
     }
 }

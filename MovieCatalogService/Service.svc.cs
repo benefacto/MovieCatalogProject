@@ -38,17 +38,16 @@ namespace MovieCatalogService
             return JsonConvert.SerializeObject(movies);
         }
 
-        public string UpdateMovie(string movieToUpdate)
+        public string UpdateMovie(String Id, Movie newMovie)
         {
             string outcome = "failure";
             List<Movie> movies;
-            Movie newMovie = JsonConvert.DeserializeObject<Movie>(movieToUpdate);
             Movie oldMovie;
             try
             {
                 movies = (JsonConvert.DeserializeObject<IEnumerable<Movie>>
                     (File.ReadAllText(FilePath))).ToList<Movie>();
-                oldMovie = movies.Single(m => m.Id == newMovie.Id);
+                oldMovie = movies.Single(m => m.Id == new Guid(Id));
                 movies.Add(newMovie);
                 movies.Remove(oldMovie);
                 File.WriteAllText(FilePath, JsonConvert.SerializeObject(movies));
@@ -61,6 +60,8 @@ namespace MovieCatalogService
             }
             return outcome;
         }
+
+        public void GetOptions() { }
     }
 
     public class CustomHeaderMessageInspector : IDispatchMessageInspector
@@ -104,7 +105,8 @@ namespace MovieCatalogService
             {
                 { "Access-Control-Allow-Origin", "*" },
                 { "Access-Control-Request-Method", "POST,GET,PUT,DELETE,OPTIONS" },
-                { "Access-Control-Allow-Headers", "X-Requested-With,Content-Type" }
+                { "Access-Control-Allow-Headers", "X-Requested-With,Content-Type" },
+                { "Access-Control-Allow-Methods", "PUT" }
             };
 
             endpointDispatcher.DispatchRuntime.MessageInspectors.Add(new CustomHeaderMessageInspector(requiredHeaders));
