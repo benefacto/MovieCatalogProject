@@ -3,7 +3,8 @@
     var init = function () {
         $http.get('http://localhost:51893/Service.svc/movie')
             .then(function (data) {
-                return JSON.parse(data.GetMoviesResult);
+                console.log(JSON.parse(data));
+                return JSON.parse(data);
             }, function (data) {
                 alert("error!");
             });
