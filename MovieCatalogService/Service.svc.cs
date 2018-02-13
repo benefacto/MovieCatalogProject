@@ -10,7 +10,7 @@ namespace MovieCatalogService
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
 
-    // TO-DO: Expose service to front end on localhost via config or other appropriate method
+    // TO-DO: Enable CORS so front end can access as per https://enable-cors.org/server_wcf.html
     public class Service : IService
     {
         private string FilePath { get; set; }
