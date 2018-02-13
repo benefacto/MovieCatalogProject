@@ -75,3 +75,4 @@ D:\MovieCatalogProject\MovieCatalog\obj\Debug\MovieCatalog.dll
 D:\MovieCatalogProject\MovieCatalog\obj\Debug\MovieCatalog.pdb
 D:\MovieCatalogProject\MovieCatalog\bin\roslyn\System.Collections.Immutable.dll
 D:\MovieCatalogProject\MovieCatalog\bin\roslyn\System.IO.FileSystem.dll
+D:\MovieCatalogProject\MovieCatalog\obj\Debug\MovieCatalogApp.csprojResolveAssemblyReference.cache
