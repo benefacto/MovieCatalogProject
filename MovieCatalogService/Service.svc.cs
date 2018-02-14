@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
@@ -37,30 +39,36 @@ namespace MovieCatalogService
             return JsonConvert.SerializeObject(movies);
         }
 
-        public string UpdateMovie(String[] movieJson)
+        public string UpdateMovie()
         {
             string outcome = "failure";
             List<Movie> movies;
-            Movie oldMovie;
+            Movie newMovie = new Movie();
+            Movie oldMovie = new Movie();
+            String rawMessage;
             try
             {
-                /*
-                var dict = JsonConvert.DeserializeObject<Dictionary<string, object>>(movieJson[0]);
+                rawMessage = OperationContext.Current.RequestContext.RequestMessage.ToString();
+                newMovie.Id = new Guid(rawMessage.Substring(rawMessage.IndexOf("<id") + 18, rawMessage.IndexOf("id>") - rawMessage.IndexOf("<id") - 20));
+                newMovie.Title = rawMessage.Substring(rawMessage.IndexOf("<title") + 21, rawMessage.IndexOf("title>") - rawMessage.IndexOf("<title") - 23);
+                newMovie.Director = rawMessage.Substring(rawMessage.IndexOf("<director") + 24, rawMessage.IndexOf("director>") - rawMessage.IndexOf("<director") - 26);
+                newMovie.Year = int.Parse(rawMessage.Substring(rawMessage.IndexOf("<year") + 20, rawMessage.IndexOf("year>") - rawMessage.IndexOf("<year") - 22));
+                newMovie.RunningTime = int.Parse(rawMessage.Substring(rawMessage.IndexOf("<runningTime") + 27, rawMessage.IndexOf("runningTime>") - rawMessage.IndexOf("<runningTime") - 29));
+
                 movies = (JsonConvert.DeserializeObject<IEnumerable<Movie>>
                     (File.ReadAllText(FilePath))).ToList<Movie>();
-                oldMovie = movies.Single(m => m.Id == new Guid(dict["id"].ToString()));
-                oldMovie.Director = dict["director"].ToString();
-                oldMovie.RunningTime = int.Parse(dict["runningTime"].ToString());
-                oldMovie.Title = dict["title"].ToString();
-                oldMovie.Year = int.Parse(dict["year"].ToString());
+                oldMovie = movies.Single(m => m.Id == newMovie.Id);
+                oldMovie.Director = (oldMovie.Director != newMovie.Director) ? newMovie.Director : oldMovie.Director;
+                oldMovie.RunningTime = (oldMovie.RunningTime != newMovie.RunningTime) ? newMovie.RunningTime : oldMovie.RunningTime;
+                oldMovie.Title = (oldMovie.Title != newMovie.Title) ? newMovie.Title : oldMovie.Title;
+                oldMovie.Year = (oldMovie.Year != newMovie.Year) ? newMovie.Year : oldMovie.Year;
                 File.WriteAllText(FilePath, JsonConvert.SerializeObject(movies));
-                
-                outcome = "success" + " " + movieJson[0];
-                */
+                outcome = "success" + " " + newMovie.ToString();
+
             }
             catch (Exception ex)
             {
-                outcome += " " + ex.ToString() + " " + movieJson[0];
+                outcome += " " + ex.ToString() + " " + newMovie.ToString();
             }
             return outcome;
         }

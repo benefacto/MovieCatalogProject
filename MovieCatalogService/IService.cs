@@ -1,5 +1,4 @@
-﻿using System;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using System.ServiceModel.Web;
 
 namespace MovieCatalogService
@@ -20,7 +19,7 @@ namespace MovieCatalogService
             ResponseFormat = WebMessageFormat.Json,
             RequestFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Wrapped)]
-        string UpdateMovie(String[] movieJson);
+        string UpdateMovie();
 
         [OperationContract]
         [WebInvoke(Method = "OPTIONS", UriTemplate = "*")]
