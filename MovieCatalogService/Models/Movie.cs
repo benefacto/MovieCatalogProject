@@ -9,5 +9,10 @@ namespace MovieCatalogService
         public string Director { get; set; }
         public int Year { get; set; }
         public int RunningTime { get; set; }
+
+        public override string ToString()
+        {
+            return Id + " " + Title + " " + Director + " " + Year + " " + RunningTime;
+        }
     }
 }

@@ -6,4 +6,3 @@ D:\MovieCatalogProject\MovieCatalogService\bin\Newtonsoft.Json.xml
 D:\MovieCatalogProject\MovieCatalogService\bin\MovieCatalogService.dll.config
 D:\MovieCatalogProject\MovieCatalogService\bin\MovieCatalogService.dll
 D:\MovieCatalogProject\MovieCatalogService\obj\Debug\MovieCatalogService.dll
-D:\MovieCatalogProject\MovieCatalogService\obj\Debug\MovieCatalogService.csprojResolveAssemblyReference.cache

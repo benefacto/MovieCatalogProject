@@ -4,7 +4,7 @@
     var init = function () {
         $http.get(endpoint)
             .then(function (response) {
-                $scope.gridOptions.data = JSON.parse(response.data.GetMoviesResult);
+                $scope.gridOptions.data = angular.fromJson(response.data.GetMoviesResult);
             }, function (response) {
                 alert("error!");
             });
@@ -12,10 +12,11 @@
 
     var update = function (rowEntity) {
         // TO-DO: Get PUT request to service to update data working
-        console.log(rowEntity);
-        $http.put(endpoint + "/" + rowEntity.id, JSON.stringify(rowEntity))
+        var newMovie = rowEntity;
+        var data = { "movieJson" : rowEntity };
+        $http.put(endpoint, angular.toJson(data))
             .then(function (response) {
-                console.log(JSON.parse(response.data.UpdateMovieResult));
+                console.log(angular.fromJson(response.data));
             }, function (response) {
                 alert("error!");
             });

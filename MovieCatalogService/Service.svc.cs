@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
@@ -38,25 +37,30 @@ namespace MovieCatalogService
             return JsonConvert.SerializeObject(movies);
         }
 
-        public string UpdateMovie(String Id, Movie newMovie)
+        public string UpdateMovie(String[] movieJson)
         {
             string outcome = "failure";
             List<Movie> movies;
             Movie oldMovie;
             try
             {
+                /*
+                var dict = JsonConvert.DeserializeObject<Dictionary<string, object>>(movieJson[0]);
                 movies = (JsonConvert.DeserializeObject<IEnumerable<Movie>>
                     (File.ReadAllText(FilePath))).ToList<Movie>();
-                oldMovie = movies.Single(m => m.Id == new Guid(Id));
-                movies.Add(newMovie);
-                movies.Remove(oldMovie);
+                oldMovie = movies.Single(m => m.Id == new Guid(dict["id"].ToString()));
+                oldMovie.Director = dict["director"].ToString();
+                oldMovie.RunningTime = int.Parse(dict["runningTime"].ToString());
+                oldMovie.Title = dict["title"].ToString();
+                oldMovie.Year = int.Parse(dict["year"].ToString());
                 File.WriteAllText(FilePath, JsonConvert.SerializeObject(movies));
-
-                outcome = "success";
+                
+                outcome = "success" + " " + movieJson[0];
+                */
             }
             catch (Exception ex)
             {
-                outcome += " " + ex.Message;
+                outcome += " " + ex.ToString() + " " + movieJson[0];
             }
             return outcome;
         }
