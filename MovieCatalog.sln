@@ -10,6 +10,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCatalogApp", "MovieCat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCatalogService", "MovieCatalogService\MovieCatalogService.csproj", "{8D0B4D37-432E-4A7C-9BAA-91ACDB249EE5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6B04912E-27B4-4A6C-865D-A803864E1014}"
+	ProjectSection(SolutionItems) = preProject
+		License.txt = License.txt
+		ReadMe.txt = ReadMe.txt
+		VisualStudio.gitignore = VisualStudio.gitignore
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,5 +1,6 @@
 ﻿var GridController = function ($scope, $http) {
-    var endpoint = "http://localhost:51893/Service.svc/movie";
+    // TO-DO: Move endpoint to config & rename; implement HTTPS for app & service
+    var endpoint = "http://localhost:3000/Service.svc/movie";
 
     var init = function () {
         $http.get(endpoint)
