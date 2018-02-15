@@ -4,139 +4,115 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Configuration;
-using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
+using System.ServiceModel.Web;
 using System.Web.Hosting;
 
 namespace MovieCatalogService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
-
-    // TO-DO: Enable CORS so front end can access as per https://enable-cors.org/server_wcf.html
     public class Service : IService
     {
+        #region constructor & properties
         private string FilePath { get; set; }
 
         public Service()
         {
             FilePath = HostingEnvironment.MapPath(@"~\Data\MovieCatalog.json");
         }
+        #endregion
+
+        #region public methods
         public string GetMovies()
         {
-            IEnumerable<Movie> movies;
+            string data = string.Empty;
+            WebOperationContext operationContext = WebOperationContext.Current;
             try
             {
-                movies = JsonConvert.DeserializeObject<IEnumerable<Movie>>
-                    (File.ReadAllText(FilePath));
+                data = File.ReadAllText(FilePath);
             }
             catch (Exception ex)
             {
-                throw ex;
+                data = ex.Message;
+                operationContext.OutgoingResponse.StatusCode =
+                    System.Net.HttpStatusCode.InternalServerError;
             }
-            return JsonConvert.SerializeObject(movies);
+            return data;
         }
 
         public string UpdateMovie()
         {
-            string outcome = "failure";
-            List<Movie> movies;
-            Movie newMovie = new Movie();
-            Movie oldMovie = new Movie();
-            String rawMessage;
+            IEnumerable<IFilm> movies;
+            IFilm newMovie = new Movie();
+            IFilm oldMovie = new Movie();
+            WebOperationContext operationContext = WebOperationContext.Current;
+            string outcome = string.Empty;
             try
             {
-                rawMessage = OperationContext.Current.RequestContext.RequestMessage.ToString();
-                newMovie.Id = new Guid(rawMessage.Substring(rawMessage.IndexOf("<id") + 18, rawMessage.IndexOf("id>") - rawMessage.IndexOf("<id") - 20));
-                newMovie.Title = rawMessage.Substring(rawMessage.IndexOf("<title") + 21, rawMessage.IndexOf("title>") - rawMessage.IndexOf("<title") - 23);
-                newMovie.Director = rawMessage.Substring(rawMessage.IndexOf("<director") + 24, rawMessage.IndexOf("director>") - rawMessage.IndexOf("<director") - 26);
-                newMovie.Year = int.Parse(rawMessage.Substring(rawMessage.IndexOf("<year") + 20, rawMessage.IndexOf("year>") - rawMessage.IndexOf("<year") - 22));
-                newMovie.RunningTime = int.Parse(rawMessage.Substring(rawMessage.IndexOf("<runningTime") + 27, rawMessage.IndexOf("runningTime>") - rawMessage.IndexOf("<runningTime") - 29));
+                newMovie = GetMovieFromRequestMessage();
 
-                movies = (JsonConvert.DeserializeObject<IEnumerable<Movie>>
-                    (File.ReadAllText(FilePath))).ToList<Movie>();
+                movies = JsonConvert.DeserializeObject<IEnumerable<Movie>>
+                    (File.ReadAllText(FilePath));
+
                 oldMovie = movies.Single(m => m.Id == newMovie.Id);
-                oldMovie.Director = (oldMovie.Director != newMovie.Director) ? newMovie.Director : oldMovie.Director;
-                oldMovie.RunningTime = (oldMovie.RunningTime != newMovie.RunningTime) ? newMovie.RunningTime : oldMovie.RunningTime;
-                oldMovie.Title = (oldMovie.Title != newMovie.Title) ? newMovie.Title : oldMovie.Title;
-                oldMovie.Year = (oldMovie.Year != newMovie.Year) ? newMovie.Year : oldMovie.Year;
+                oldMovie.Director = (oldMovie.Director != newMovie.Director) ?
+                    newMovie.Director : oldMovie.Director;
+                oldMovie.RunningTime = (oldMovie.RunningTime != newMovie.RunningTime) ?
+                    newMovie.RunningTime : oldMovie.RunningTime;
+                oldMovie.Title = (oldMovie.Title != newMovie.Title) ?
+                    newMovie.Title : oldMovie.Title;
+                oldMovie.Year = (oldMovie.Year != newMovie.Year) ?
+                    newMovie.Year : oldMovie.Year;
+
                 File.WriteAllText(FilePath, JsonConvert.SerializeObject(movies));
-                outcome = "success" + " " + newMovie.ToString();
+                outcome = newMovie.ToString();
 
             }
             catch (Exception ex)
             {
-                outcome += " " + ex.ToString() + " " + newMovie.ToString();
+                outcome = ex.Message;
+                operationContext.OutgoingResponse.StatusCode =
+                    System.Net.HttpStatusCode.InternalServerError;
             }
             return outcome;
         }
 
         public void GetOptions() { }
-    }
+        #endregion
 
-    public class CustomHeaderMessageInspector : IDispatchMessageInspector
-    {
-        Dictionary<string, string> requiredHeaders;
-        public CustomHeaderMessageInspector(Dictionary<string, string> headers)
+        #region private methods
+        // TO-DO: Replace this by using actual JSON-to-object parsing/binding either via 
+        // Microsoft libraries or Newtonsoft.Json
+        private IFilm GetMovieFromRequestMessage()
         {
-            requiredHeaders = headers ?? new Dictionary<string, string>();
+            IFilm movie = new Movie();
+            string requestMessage = OperationContext.Current.RequestContext.RequestMessage.ToString();
+
+            movie.Id = new Guid(
+                    FindInRequestMessage(requestMessage, "<id", 18, "id>", -20)
+                    );
+            movie.Title = FindInRequestMessage(
+                requestMessage, "<title", 21, "title>", -23
+                );
+            movie.Director = FindInRequestMessage(
+                requestMessage, "<director", 24, "director>", -26
+                );
+            movie.Year = int.Parse(
+                FindInRequestMessage(requestMessage, "<year", 20, "year>", -22)
+                );
+            movie.RunningTime = int.Parse(
+                FindInRequestMessage(requestMessage, "<runningTime", 27, "runningTime>", -29)
+                );
+
+            return movie;
         }
 
-        public object AfterReceiveRequest(ref System.ServiceModel.Channels.Message request, System.ServiceModel.IClientChannel channel, System.ServiceModel.InstanceContext instanceContext)
+        // TO-DO: Replace this by using actual JSON-to-object parsing/binding either via 
+        // Microsoft libraries or Newtonsoft.Json
+        private string FindInRequestMessage(string requestMessage, string startSubString,
+            int startOffset, string endSubString, int endOffset)
         {
-            return null;
+            return requestMessage.Substring(requestMessage.IndexOf(startSubString) + startOffset,
+                requestMessage.IndexOf(endSubString) - requestMessage.IndexOf(startSubString) + endOffset);
         }
-
-        public void BeforeSendReply(ref System.ServiceModel.Channels.Message reply, object correlationState)
-        {
-            var httpHeader = reply.Properties["httpResponse"] as HttpResponseMessageProperty;
-            foreach (var item in requiredHeaders)
-            {
-                httpHeader.Headers.Add(item.Key, item.Value);
-            }
-        }
-    }
-
-    public class EnableCrossOriginResourceSharingBehavior : BehaviorExtensionElement, IEndpointBehavior
-    {
-        public void AddBindingParameters(ServiceEndpoint endpoint, System.ServiceModel.Channels.BindingParameterCollection bindingParameters)
-        {
-
-        }
-
-        public void ApplyClientBehavior(ServiceEndpoint endpoint, System.ServiceModel.Dispatcher.ClientRuntime clientRuntime)
-        {
-
-        }
-
-        public void ApplyDispatchBehavior(ServiceEndpoint endpoint, System.ServiceModel.Dispatcher.EndpointDispatcher endpointDispatcher)
-        {
-            var requiredHeaders = new Dictionary<string, string>
-            {
-                { "Access-Control-Allow-Origin", "*" },
-                { "Access-Control-Request-Method", "POST,GET,PUT,DELETE,OPTIONS" },
-                { "Access-Control-Allow-Headers", "X-Requested-With,Content-Type" },
-                { "Access-Control-Allow-Methods", "PUT" }
-            };
-
-            endpointDispatcher.DispatchRuntime.MessageInspectors.Add(new CustomHeaderMessageInspector(requiredHeaders));
-        }
-
-        public void Validate(ServiceEndpoint endpoint)
-        {
-
-        }
-
-        public override Type BehaviorType
-        {
-            get { return typeof(EnableCrossOriginResourceSharingBehavior); }
-        }
-
-        protected override object CreateBehavior()
-        {
-            return new EnableCrossOriginResourceSharingBehavior();
-        }
+        #endregion
     }
 }

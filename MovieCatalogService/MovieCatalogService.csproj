@@ -68,6 +68,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cors\CustomHeaderMessageInspector.cs" />
+    <Compile Include="Cors\EnableCrossOriginResourceSharingBehavior.cs" />
     <Compile Include="Models\IFilm.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Service.svc.cs">

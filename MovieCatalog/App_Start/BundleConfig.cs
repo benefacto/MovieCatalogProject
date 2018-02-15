@@ -18,7 +18,7 @@ namespace MovieCatalog
                 .Include("~/Scripts/GridController.js")
                 .Include("~/Scripts/GridApp.js"));
 
-            BundleTable.EnableOptimizations = false;
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
