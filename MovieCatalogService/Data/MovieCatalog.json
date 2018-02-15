@@ -1,17 +1,52 @@
 [
   {
+    "id": "025dae81-0f5f-46d1-8195-2c58710b96fb",
+    "title": "The Killers",
+    "director": "Andrei Tarkovsky",
+    "year": "1956",
+    "runningTime": "19"
+  },
+  {
+    "id": "ec708d51-f4ee-4b95-a064-62ffa8b0b92c",
+    "title": "There Will be No Leave Today",
+    "director": "Andrei Tarkovsky",
+    "year": "1959",
+    "runningTime": "46"
+  },
+  {
+    "id": "25b16c41-7e2f-497b-8930-d709c8d41b9a",
+    "title": "The Steamroller and the Violin",
+    "director": "Andrei Tarkovsky",
+    "year": "1961",
+    "runningTime": "46"
+  },
+  {
+    "id": "7af53e1d-96fe-442b-844e-b21d2425f6b9",
+    "title": "Ivan's Childhood",
+    "director": "Andrei Tarkovsky",
+    "year": "1962",
+    "runningTime": "95"
+  },
+  {
     "id": "818fd4ec-2919-43f1-b515-1b3afe083dd9",
     "title": "Andrei Rublev",
     "director": "Andrei Tarkovsky",
     "year": "1966",
-    "runningTime": "183"
+    "runningTime": "205"
   },
   {
     "id": "8710636f-50f7-49cb-9100-7067e72d8ade",
     "title": "Solaris",
     "director": "Andrei Tarkovsky",
     "year": "1972",
-    "runningTime": "98"
+    "runningTime": "165"
+  },
+  {
+    "id": "6e8393e0-1788-40ac-a030-a880e1b4f826",
+    "title": "Mirror",
+    "director": "Andrei Tarkovsky",
+    "year": "1975",
+    "runningTime": "107"
   },
   {
     "id": "5c63eefb-8843-4214-a38a-93e15dd826cb",
@@ -26,6 +61,13 @@
     "director": "Andrei Tarkovsky",
     "year": "1983",
     "runningTime": "125"
+  },
+  {
+    "id": "70a6fe29-cf24-4295-b3bb-24c57b805a53",
+    "title": "Voyage in Time",
+    "director": "Andrei Tarkovsky",
+    "year": "1983",
+    "runningTime": "63"
   },
   {
     "id": "3f18a7c6-60a9-48a8-a089-1e8680121a51",
